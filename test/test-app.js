@@ -33,7 +33,8 @@ describe('Ngep:app', function () {
     it('creates project files', function () {
       assert.file([
         'bower.json',
-        'package.json'
+        'package.json',
+        'gulpfile.js'
       ]);
     });
 
