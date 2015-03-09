@@ -9,12 +9,28 @@ describe('Ngep:filter', function () {
     helpers.run(path.join(__dirname, '../generators/filter'))
       .withArguments('name', '--force')
       .withOptions({ 'skip-install': true })
+      .withPrompt({
+        filterName: "my filter",
+        moduleSlug: "my-module"
+      })
       .on('end', done);
   });
 
-  it('creates files', function () {
-    assert.file([
-      'somefile.js'
-    ]);
+  describe('app files', function () {
+
+    it('creates app files', function () {
+      assert.file([
+        'src/app/modules/my-module/filters/my-filter/my-filter.filter.js'
+      ]);
+    });
+
+    it('my-filter.filter.js should contain module name', function () {
+      assert.fileContent('src/app/modules/my-module/filters/my-filter/my-filter.filter.js', /angular\.module\('app.my-module'/);
+    });
+
+    it('my-filter.filter.js should contain filter name', function () {
+      assert.fileContent('src/app/modules/my-module/filters/my-filter/my-filter.filter.js', /filter\('my-filter'/);
+    });
+
   });
 });

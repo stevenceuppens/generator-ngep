@@ -6,10 +6,10 @@ module.exports = yeoman.generators.Base.extend({
     this.argument('name', {
       required: true,
       type: String,
-      desc: 'The subgenerator name'
+      desc: 'The module name'
     });
 
-    this.log('You called the Ngep subgenerator with the argument ' + this.name + '.');
+    this.log('You called the Ngep module generator with the argument ' + this.name + '.');
   },
 
   prompting: function () {
