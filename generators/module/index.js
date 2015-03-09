@@ -27,6 +27,7 @@ module.exports = yeoman.generators.Base.extend({
       this.moduleSlug = this._.slugify(props.moduleName);
       this.ngModules = this.config.get('ngModules');
 
+      // this makes props available trough composeWith()
       this._.merge(this.options, props);
 
       done();
