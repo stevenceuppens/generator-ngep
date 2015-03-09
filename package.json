@@ -1,0 +1,40 @@
+{
+  "name": "generator-ngep",
+  "version": "0.0.0",
+  "description": "Yeoman generator",
+  "license": "MIT",
+  "main": "app/index.js",
+  "repository": "stevenceuppens/generator-ngep",
+  "author": {
+    "name": "Steven Ceuppens",
+    "email": "steven.ceuppens@icloud.com",
+    "url": "https://github.com/stevenceuppens"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "mocha",
+    "test:watch": "mocha --watch"
+  },
+  "files": [
+    "app",
+    "module",
+    "service",
+    "filter",
+    "directive",
+    "controller",
+    "view"
+  ],
+  "keywords": [
+    "yeoman-generator"
+  ],
+  "dependencies": {
+    "yeoman-generator": "^0.18.9",
+    "chalk": "^1.0.0",
+    "yosay": "^1.0.2"
+  },
+  "devDependencies": {
+    "mocha": "*"
+  }
+}
