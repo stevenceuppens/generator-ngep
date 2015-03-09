@@ -45,7 +45,7 @@ module.exports = yeoman.generators.Base.extend({
   configuring: {
     compose: function () {
       if(this.module === 'new module') {
-        this.composeWith('ngep:module', { args: [''], options: this.options });
+        this.composeWith('ngep:module', { args: ['newModule'], options: this.options });
       }
     },
     postCompose: function () {

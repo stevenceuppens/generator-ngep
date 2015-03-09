@@ -14,8 +14,8 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "mocha",
-    "test:watch": "mocha --watch"
+    "test": "./node_modules/.bin/mocha -R spec",
+    "test:watch": "./node_modules/.bin/mocha -R dot --watch"
   },
   "files": [
     "app",
