@@ -2,7 +2,7 @@
 
 (function(window, document, angular) {
 
-	angular.module('app', [])
+	angular.module('app', [<% _.each(ngModules, function(module, i) { %>'<%= module %>'<% if (i+1 < ngModules.length) { %>,<% }}); %>])
 
 	.config(function () {
 

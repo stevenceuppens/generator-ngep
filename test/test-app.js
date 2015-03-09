@@ -11,7 +11,8 @@ describe('ngep:app', function () {
       .inDir(path.join(os.tmpdir(), './temp-test'))
       .withOptions({ 'skip-install': true })
       .withPrompt({
-        appName: "my project"
+        appName: "my project",
+        ngModules: ['ui-router','restangular']
       })
       .on('end', done);
   });
@@ -57,6 +58,10 @@ describe('ngep:app', function () {
 
     it('index.html should contain project name as title', function () {
       assert.fileContent('src/index.html', /<title>my-project<\/title>/);
+    });
+
+    it('app.js should contain selected ngModules', function () {
+      assert.fileContent('src/app/app.js', /angular\.module\('app', \['ui-router','restangular'\]\)/);
     });
     
   });

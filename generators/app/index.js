@@ -16,16 +16,27 @@ module.exports = yeoman.generators.Base.extend({
       'Welcome to the dazzling ' + chalk.red('Ngep') + ' generator!'
     ));
 
-    var prompts = [{
-      type: 'input',
-      name: 'appName',
-      message: 'Your application name',
-      default: this.appname
-    }];
+    var prompts = [
+      {
+        type: 'input',
+        name: 'appName',
+        message: 'Your application name',
+        default: this.appname
+      },
+      {
+        type: 'checkbox',
+        name: 'ngModules',
+        message: 'Angular modules',
+        choices: ['ui-router','restangular','ng-resource']
+      }
+    ];
 
     this.prompt(prompts, function (props) {
       this.appName = props.appName;
       this.appSlug = this._.slugify(props.appName);
+      this.ngModules = props.ngModules;
+
+      this.config.set('ngModules', this.ngModules);
 
       done();
     }.bind(this));
