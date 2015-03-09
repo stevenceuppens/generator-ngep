@@ -9,12 +9,23 @@ describe('Ngep:module', function () {
     helpers.run(path.join(__dirname, '../generators/module'))
       .withArguments('name', '--force')
       .withOptions({ 'skip-install': true })
+      .withPrompt({
+        moduleName: "my module"
+      })
       .on('end', done);
   });
 
-  it('creates files', function () {
-    assert.file([
-      'somefile.js'
-    ]);
+  describe('app files', function () {
+    
+    it('creates app files', function () {
+      assert.file([
+        'src/app/modules/my-module/my-module.module.js'
+      ]);
+    });
+
+    it('my-module.module.js should contain module name', function () {
+      assert.fileContent('src/app/modules/my-module/my-module.module.js', /angular\.module\('app.my-module'/);
+    });
+
   });
 });
