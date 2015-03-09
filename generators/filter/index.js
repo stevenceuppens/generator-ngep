@@ -47,5 +47,11 @@ module.exports = yeoman.generators.Base.extend({
       this.destinationPath('src/app/modules/' + this.moduleSlug + '/filters/' + this.filterSlug + '/' + this.filterSlug + '.filter.js'),
       this
     );
+
+    this.fs.copyTpl(
+      this.templatePath('filter.spec.js'),
+      this.destinationPath('src/app/modules/' + this.moduleSlug + '/filters/' + this.filterSlug + '/' + this.filterSlug + '.filter.spec.js'),
+      this
+    );
   }
 });

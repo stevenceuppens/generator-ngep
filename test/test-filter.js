@@ -20,7 +20,8 @@ describe('Ngep:filter', function () {
 
     it('creates app files', function () {
       assert.file([
-        'src/app/modules/my-module/filters/my-filter/my-filter.filter.js'
+        'src/app/modules/my-module/filters/my-filter/my-filter.filter.js',
+        'src/app/modules/my-module/filters/my-filter/my-filter.filter.spec.js'
       ]);
     });
 
@@ -30,6 +31,10 @@ describe('Ngep:filter', function () {
 
     it('my-filter.filter.js should contain filter name', function () {
       assert.fileContent('src/app/modules/my-module/filters/my-filter/my-filter.filter.js', /filter\('my-filter'/);
+    });
+
+    it('my-filter.filter.spec.js should contain filter name', function () {
+      assert.fileContent('src/app/modules/my-module/filters/my-filter/my-filter.filter.spec.js', /describe\('my-filter'/);
     });
 
   });
