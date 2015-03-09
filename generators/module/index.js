@@ -8,8 +8,6 @@ module.exports = yeoman.generators.Base.extend({
       type: String,
       desc: 'The module name'
     });
-
-    this.log('You called the Ngep module generator with the argument ' + this.name + '.');
   },
 
   prompting: function () {
@@ -27,8 +25,9 @@ module.exports = yeoman.generators.Base.extend({
     this.prompt(prompts, function (props) {
       this.moduleName = props.moduleName;
       this.moduleSlug = this._.slugify(props.moduleName);
-
       this.ngModules = this.config.get('ngModules');
+
+      this._.merge(this.options, props);
 
       done();
     }.bind(this));

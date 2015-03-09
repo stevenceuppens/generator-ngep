@@ -11,7 +11,7 @@ describe('Ngep:filter', function () {
       .withOptions({ 'skip-install': true })
       .withPrompt({
         filterName: "my filter",
-        moduleSlug: "my-module"
+        module: "my-module"
       })
       .on('end', done);
   });
@@ -34,7 +34,7 @@ describe('Ngep:filter', function () {
     });
 
     it('my-filter.filter.spec.js should contain filter name', function () {
-      assert.fileContent('src/app/modules/my-module/filters/my-filter/my-filter.filter.spec.js', /describe\('my-filter'/);
+      assert.fileContent('src/app/modules/my-module/filters/my-filter/my-filter.filter.spec.js', /describe\('my-filter filter'/);
     });
 
   });

@@ -1,6 +1,7 @@
 'use strict';
+
 var yeoman = require('yeoman-generator');
-var inquirer = require('inquirer');
+var utils = require('../../lib/utils.js');
 
 module.exports = yeoman.generators.Base.extend({
   initializing: function () {
@@ -25,33 +26,51 @@ module.exports = yeoman.generators.Base.extend({
       },
       {
         type: 'list',
-        name: 'moduleSlug',
+        name: 'module',
         message: 'Select your module',
         store: true,
-        choices: ['core', new inquirer.Separator(), 'new module']
+        choices: utils.getModuleList(this.destinationPath('src/app/modules/'))
       }
     ];
 
     this.prompt(prompts, function (props) {
       this.filterName = props.filterName;
       this.filterSlug = this._.slugify(props.filterName);
-      this.moduleSlug = props.moduleSlug
+      this.module = props.module;
 
       done();
     }.bind(this));
   },
 
-  writing: function () {
-    this.fs.copyTpl(
-      this.templatePath('filter.js'),
-      this.destinationPath('src/app/modules/' + this.moduleSlug + '/filters/' + this.filterSlug + '/' + this.filterSlug + '.filter.js'),
-      this
-    );
+  configuring: {
+    compose: function () {
+      if(this.module === 'new module') {
+        this.composeWith('ngep:module', { args: [''], options: this.options });
+      }
+    },
+    postCompose: function () {
+      if(this.module === 'new module') {
+        this.moduleSlug = this._.slugify(this.options.moduleName);
+      }
+      else{
+        this.moduleSlug = this.module;
+      }
+    }
+  },
 
-    this.fs.copyTpl(
-      this.templatePath('filter.spec.js'),
-      this.destinationPath('src/app/modules/' + this.moduleSlug + '/filters/' + this.filterSlug + '/' + this.filterSlug + '.filter.spec.js'),
-      this
-    );
+  writing: {
+    appFiles: function () {
+      this.fs.copyTpl(
+        this.templatePath('filter.js'),
+        this.destinationPath('src/app/modules/' + this.moduleSlug + '/filters/' + this.filterSlug + '/' + this.filterSlug + '.filter.js'),
+        this
+      );
+
+      this.fs.copyTpl(
+        this.templatePath('filter.spec.js'),
+        this.destinationPath('src/app/modules/' + this.moduleSlug + '/filters/' + this.filterSlug + '/' + this.filterSlug + '.filter.spec.js'),
+        this
+      );
+    }
   }
 });
